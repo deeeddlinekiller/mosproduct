@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A fact 100 million people dont know</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+
+       .popup-window {
+          display: none;
+          position: fixed;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          background-color: white;
+          padding: 20px;
+          border: 1px solid #ddd;
+          box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+          z-index: 1000;
+}
+
+        .popup-content {
+            text-align: center;
+        }        
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            cursor: url('D:/matrix/alternate.cur'), auto; /* 自定义鼠标光标 */
+        }
+
+
+        .container {
+            display: flex;
+            align-items: flex-start; /* 保证顶部对齐 */
+            justify-content: center;
+            height: 200%;
+       /* 增加外部容器的宽度 */
+            width: 200%; /* 或者更大的百分比，根据需要调整 */
+            transform: scale(0.5); /* 缩小显示比例，以适应屏幕 */
+            transform-origin: top left; /* 确保缩放时以容器的左上角为基点 */
+        }
+
+        .video-container {
+            position: absolute;
+            top: 20%;  /* 或根据需要进行调整 */
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 30%; /* 减小视频宽度 */
+            height: 0;
+            padding-bottom: 16.95%; /* 根据16:9比例调整此值以维持视频的纵横比 */
+            z-index: 100;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .contra, .side-image {
+            height: 1000px;
+        }
+
+        .contra {
+            width: 600px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .image {
+            width: 100%;
+            height: 50%;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .image.top {
+            background-image: url('background.jpg'); /* 根据实际路径更新 */
+        }
+
+        .image.bottom {
+            background-image: url('back1.jpg'); /* 根据实际路径更新 */
+        }
+
+        .side-image {
+            width: 400px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .side-image.left {
+            background-image: url('JLgnM5O5lsafn56z.gif'); /* 根据实际路径更新 */
+        }
+
+        .side-image.right {
+            background-image: url('QN9xDQdc4vRvTpDn.gif'); /* 根据实际路径更新 */
+        }
+
+        .floating-image {
+            position: absolute;
+        /* 设置初始位置，如 left: 0; top: 0; */
+        }
+
+
+
+    </style>
+</head>
+<body>
+
+            
+    <div class="container">
+
+             <!-- 弹出窗口 -->
+       <div id="popupWindow" class="popup-window">
+           <div class="popup-content">
+            <p>Join us for the Great MoLI Book Swap! Taking place on 25 & 26 November, the Book Swap is your opportunity to rehome your well-loved books, and pick up some new reads in the process. Admission is half price (code BOOKSWAP) when you bring a book!</p>
+            <button id="closeButton">Close</button>
+           </div>
+       </div>
+
+        <div class="side-image left"></div>
+        <div class="contra">
+            <div class="image top"></div>
+            <div class="image bottom"></div>
+        </div>
+        <div class="side-image right"></div>
+        <img src="300x250.gif" id="floatingImage" class="floating-image">
+
+    </div>
+
+    <!-- 视频容器 -->
+    <div class="video-container">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/3NCvDMsTgQI?si=Nluj8fKNVein7eud" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+
+    <audio id="soundEffect" src="1.m4a"></audio>
+
+<script>
+
+    
+
+    const floatingImage = document.getElementById('floatingImage');
+    const soundEffect = document.getElementById('soundEffect');
+    let isHovered = false;
+
+    // 更新图像位置的函数
+    function updatePosition(element, x, y) {
+        element.style.left = x + 'px';
+        element.style.top = y + 'px';
+    }
+
+    // 生成随机位置的函数
+    function generateRandomPosition(element) {
+        const x = Math.random() * (window.innerWidth - element.clientWidth);
+        const y = Math.random() * (window.innerHeight - element.clientHeight);
+        return { x, y };
+    }
+
+    // 实现漂浮效果的函数
+    function floatImage() {
+        if (!isHovered) {
+            const newPosition = generateRandomPosition(floatingImage);
+            updatePosition(floatingImage, newPosition.x, newPosition.y);
+        }
+    }
+
+    // 设置定时器以定期更新位置
+    setInterval(floatImage, 2000); // 每2秒更新一次位置
+
+    // 鼠标悬停和移出事件
+    floatingImage.addEventListener('mouseover', () => {
+        isHovered = true;
+        soundEffect.play();
+    });
+
+    floatingImage.addEventListener('mouseout', () => {
+        isHovered = false;
+    });
+
+    // 初始化位置
+    floatImage();
+
+    document.getElementById('floatingImage').addEventListener('click', function() {
+    document.getElementById('popupWindow').style.display = 'block';
+    });
+
+    document.getElementById('closeButton').addEventListener('click', function() {
+    alert('This button is disabled. Click outside the window to close it.');
+    });
+
+    window.addEventListener('click', function(event) {
+    let popupWindow = document.getElementById('popupWindow');
+    if (event.target == popupWindow) {
+        popupWindow.style.display = 'none';
+    }
+    });
+</script>
+
+</body>
+</html>
