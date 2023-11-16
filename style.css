@@ -1,0 +1,98 @@
+.popup-window {
+    display: none;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ddd;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+    z-index: 1000;
+}
+
+.popup-content {
+    text-align: center;
+}
+
+
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    cursor: url('unavailable.cur'), auto; /* 自定义鼠标光标 */
+}
+
+.container {
+    display: flex;
+    align-items: flex-start; /* 保证顶部对齐 */
+    justify-content: center;
+    height: 100%;
+    width: 100%; /* 或者更大的百分比，根据需要调整 */
+    transform: scale(1); /* 缩小显示比例，以适应屏幕 */
+    transform-origin: top left; /* 确保缩放时以容器的左上角为基点 */
+}
+
+.contra, .side-image {
+    height: 1000px;
+}
+
+.contra {
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    position: relative; /* 使子元素的绝对定位相对于此元素 */
+    /* 设置背景墙的宽度、高度等其他样式 */
+}
+
+.image {
+    width: 100%;
+    height: 50%;
+    background-size: cover;
+    background-position: center;
+}
+
+.image.top {
+    background-image: url('background.jpg'); /* 根据实际路径更新 */
+}
+
+.image.bottom {
+    background-image: url('back1.jpg'); /* 根据实际路径更新 */
+}
+
+.side-image {
+    width: 400px;
+    background-size: cover;
+    background-position: center;
+}
+
+.side-image.left {
+    background-image: url('side1.gif'); /* 根据实际路径更新 */
+}
+
+.side-image.right {
+    background-image: url('side2.gif'); /* 根据实际路径更新 */
+}
+
+.floating-image {
+    position: absolute;
+    cursor: url('link.cur'), auto; /* 自定义鼠标光标 */
+    z-index: 10;
+    transition: left 2s ease, top 2s ease; /* 平滑过渡效果 */
+}
+
+.video-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 320px; /* 设置视频的固定宽度 */
+    height: 180px; /* 设置视频的固定高度，根据视频的纵横比调整 */
+    z-index: 5; /* 可能需要调整以确保视频显示在其他元素之上 */
+}
+
+.video-container iframe {
+    width: 100%;
+    height: 100%;
+}
